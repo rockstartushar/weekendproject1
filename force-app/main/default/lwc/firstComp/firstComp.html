@@ -1,0 +1,38 @@
+<template>
+    <form>
+        <input id="test" type="text" placeholder="Enter your name" />
+        <input id="test1" type="email" placeholder="Enter your email" />
+        <input id="marks" type="number" placeholder="Enter marks" onkeyup={updateMarks}/>
+        <button type="button" onclick={handleSubmitBtnClick}>Submit</button>
+    </form>
+    Student Marks
+    <p>Marks: {studentData.studentMarks}</p>
+    <template if:true={isShowDetail} >
+        <button onclick={hideDetail}>Hide Detail</button>
+    <p>Hello World</p>
+    <p>Student Name: {name}</p>
+    <p>Student Email: {email}</p>
+    <p>{studentList}</p>
+    <p>{stdNameList}</p>
+    <template for:each={studentList} for:index='sno' for:item="student">
+        <div key={student.email}>
+            <p>{sno}</p>
+            <p>Name: {student.name}</p>
+            <p>Email: {student.email}</p>
+            <p>Phone: {student.phone}</p>
+            <p>Student Marks: {student.studentMarks}</p>
+        </div>
+    </template>
+    Student Name
+    <template iterator:it={stdNameList}>
+        <div key={it.value}>
+            <div lwc:if={it.first} >First Topper</div>
+            <div lwc:if={it.last}>Last Topper</div>
+            <p>{sno}</p>
+            <p>Name: {it.value}</p>
+
+        </div>
+    </template>
+    <button onclick={getExistingStudentsData}>Get Student Data</button>
+</template>
+</template>

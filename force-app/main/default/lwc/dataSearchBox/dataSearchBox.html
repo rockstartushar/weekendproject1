@@ -1,0 +1,51 @@
+<template>
+    <lightning-card>
+        <div class="slds-p-horizontal_x-small">
+            <h3 slot="title">
+                <lightning-icon icon-name="utility:search" size="small"></lightning-icon>
+                Search Box
+            </h3>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_2-of-3">
+                    <lightning-input
+                        name="enter-search"
+                        label="Search for records"
+                        type="search"
+                        data-id="inputbox"
+                    ></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-m-top_medium searchsection" style="margin-top: 1.37rem !important;">
+                    <lightning-button variant="brand" label="Search" title="Primary action" onclick={setSearchValue} class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </div>
+            <p if:true={name}>
+                Searched for {name}!
+            </p>
+            <!-- <template if:true={loaded}>
+                <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+            </template> -->
+        </div>
+    </lightning-card>
+    <lightning-card>
+        <div if:false={noResult}>
+            <lightning-button label="New Record" title="Non-primary action" onclick={openCreateNewRecord} class="slds-m-left_x-small"></lightning-button>
+            <lightning-datatable
+                    key-field="Id"
+                    data={studentData}
+                    show-row-number-column
+                    row-number-offset={rowOffset}
+                    suppress-bottom-bar
+                    columns={columns}
+                    onrowaction={handleRowAction}>
+            </lightning-datatable>
+        </div>
+        <div if:true={noResult}>
+            <span>No result found</span>
+        </div>
+        <template for:each={studentData} for:item='std' for:index='i'>
+            <div key={std.Id}>
+                <p>{i} {std.Name} {std.CreatedDate}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

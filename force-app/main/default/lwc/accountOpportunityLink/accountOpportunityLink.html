@@ -1,0 +1,58 @@
+<template>
+     <c-searchinp obj-name="Account" onsearched={getSearchedDataFromServer}></c-searchinp>
+    <div class="slds-m-bottom_x-small">
+        <p class="heading">{accTitle}</p>
+        <div class="slds-grid slds-gutters">
+            <template for:each={accData} for:item="acc" for:index="i">
+                <lightning-card key={acc.Id} class="slds-col" title={acc.Name} data-id={acc.Id} onclick={setAccountToBeLinked}>
+                    <template if:true={acc.isChecked}>
+                        <div class="slds-form-element__control slds-float_right slds-p-right_x-small">
+                            <div class="slds-checkbox">
+                                <input type="checkbox" name="options" id={acc.Id} value="checkbox-unique-id-81" checked={acc.isChecked} />
+                                <label class="slds-checkbox__label" for={acc.Id}>
+                                    <span class="slds-checkbox_faux"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </template>
+                    <p class="slds-p-horizontal_small">{acc.NumberOfEmployees}</p>
+                    <p class="slds-p-horizontal_small">{acc.No_of_Opportunties__c}</p>
+                    <p class="slds-p-horizontal_small">{acc.CreatedDate}</p>
+                </lightning-card>
+        </template>
+        </div>
+        <template if:false={accResult}> 
+            No result found
+        </template>
+    </div>
+    <c-searchinp obj-name="Opportunity" onsearched={getSearchedDataFromServer}></c-searchinp>
+    <div class="slds-m-bottom_x-small">
+        <p class="heading">{oppTitle}</p>
+        <div class="slds-grid slds-gutters">
+        <template for:each={oppData} for:item="opp">
+            <lightning-card key={opp.Id} class="slds-col" title={opp.Name} data-id={opp.Id} onclick={setOpportunityToBeLinked}>
+                <template if:true={opp.isChecked}>
+                    <div class="slds-form-element__control slds-float_right slds-p-right_x-small">
+                        <div class="slds-checkbox">
+                            <input type="checkbox" name="options" id={opp.Id} value="checkbox-unique-id-81" checked={opp.isChecked} />
+                            <label class="slds-checkbox__label" for={opp.Id}>
+                                <span class="slds-checkbox_faux"></span>
+                            </label>
+                        </div>
+                    </div>
+                </template>
+              <p class="slds-p-horizontal_small">   {opp.StageName}</p>
+              <p class="slds-p-horizontal_small">  {opp.CloseDate}  </p>
+              <p class="slds-p-horizontal_small">  {opp.CreatedDate}</p>
+            </lightning-card>
+        </template>
+        </div>
+    </div>
+
+    <template if:true={isShowFinalBtns}>
+        <div class='slds-align_absolute-center'>
+            <lightning-button variant="brand" label="Save" title="Primary action" onclick={onSave} class="slds-m-left_x-small"></lightning-button>
+            <lightning-button variant="brand-outline" label="Cancel" title="Primary action with lighter look" onclick={onCancel} class="slds-m-left_x-small"></lightning-button>
+        </div>
+    </template>
+</template>

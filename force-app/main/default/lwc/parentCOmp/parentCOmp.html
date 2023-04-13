@@ -1,0 +1,11 @@
+<template>
+    <lightning-card>
+        Message to Parent: {parentMess}
+        Message to Parent DOM: {parentDOMMess}
+        <lightning-button label="Toggle Child Comp" title="Non-primary action" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    </lightning-card>
+    
+    <div lwc:if={isShow} onmessagetoparentdom={setParentDOMMessage}>
+        <c-child-comp onmessagetoparent={setMessageForParent}></c-child-comp>
+    </div>
+</template>
